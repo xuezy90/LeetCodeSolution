@@ -15,10 +15,11 @@ public class MaxPoints {
 		List<HashSet<Integer>> setls = null;
 		HashSet<Integer> set = null;
 		boolean newSetFlag = true;
-		int maxnumber = 1;
+		int maxnumber = 2;
 		double slope = 0.0;
 		Map<Double,List<HashSet<Integer>>> map = new HashMap<Double,List<HashSet<Integer>>>();
 		if(points == null||points.length == 0) return 0;
+		else if(points.length == 1) return 1;
 		for(int i = 0;i<points.length-1;i++)
 		{
 			a = points[i];
