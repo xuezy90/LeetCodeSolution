@@ -11,7 +11,7 @@ public class MaxPoints {
 		
 		int kcounter = 0;
 		int duplicate = 0;		
-		int maxnumber = 2;
+		int maxnumber = 0;
 		double slope = 0.0;
 		
 		Map<Double,Integer> map = new HashMap<Double,Integer>();
