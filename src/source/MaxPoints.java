@@ -52,7 +52,7 @@ public class MaxPoints {
 		return maxnumber;
 	}
 	public static void main(String[] args) {
-		final int pointNumber = 10000; 
+		final int pointNumber = 1000; 
 		int maxNumber = 0;
 		MaxPoints mp = new MaxPoints();
 		Point[] points = new Point[pointNumber];
