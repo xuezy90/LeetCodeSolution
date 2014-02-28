@@ -2,6 +2,19 @@ package algorithms;
 
 public class MaxSubString {
 	
+	public int MaxSubString_n(int[] source,int left,int right)
+	{
+		int sum = 0;
+		int b = 0;
+		for(int i=left;i<=right;i++)
+		{
+			if(b>0) b += source[i];
+			else b = source[i];
+			if(b > sum) sum = b;
+		}
+		return sum;
+	}
+	
 	public DataItem maxSubString(int[] source,int left,int right)
 	{
 		DataItem sum = new DataItem(0, left, right);
@@ -47,13 +60,14 @@ public class MaxSubString {
 			if(sum.sum <= leftsum.sum) sum = leftsum;
 			if(sum.sum <= rightsum.sum) sum = rightsum;
 		}
-		System.out.println(sum.sum+"  "+sum.besti+"  "+sum.bestj);
+//		System.out.println(sum.sum+"  "+sum.besti+"  "+sum.bestj);
 		return sum;
 	}
 	public static void main(String[] args) {
 		
 		MaxSubString mss = new MaxSubString();
 		int[] source = {-1,2,3,-4,0,7,2,-2,3};
+		System.out.println(mss.MaxSubString_n(source, 0, source.length-1));
 		DataItem di = mss.maxSubString(source, 0, source.length-1);
 		System.out.println(di.sum+"  "+di.besti+"  "+di.bestj);
 	}
