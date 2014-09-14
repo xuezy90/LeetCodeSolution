@@ -9,9 +9,15 @@ package entity;
  */
 public class ListNode {
       public int val;
+      public int key;
       public ListNode next;
       public ListNode(int x) {
           val = x;
           next = null;
+      }
+      public ListNode(int k,int v)
+      {
+          this.key = k;
+          this.val = v;
       }
 }

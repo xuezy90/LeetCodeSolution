@@ -12,36 +12,44 @@ import tools.LinkedList;
  */
 public class SortList {
     public ListNode sortList(ListNode head) {
-//        this.printList("ReadyForSort : ",head);
-        if(head == null || head.next == null || head.next.next == null) return head;
-        ListNode nspeed = head;
-        ListNode dspeed = head;
+//        LinkedList.printList("ReadyForSort : ",head);
+        if(head == null || head.next == null) return head;
+        ListNode realHead = new ListNode(0);
+        realHead.next = head;
+        ListNode nspeed = realHead;
+        ListNode dspeed = realHead;
         while(dspeed.next != null && dspeed.next.next!=null)
         {
             nspeed = nspeed.next;
             dspeed = dspeed.next.next;
         }
-        ListNode newhead = new ListNode(0);
-        newhead.next = nspeed.next;
+        ListNode newhead = nspeed.next;
         nspeed.next = null;
         ListNode temp1 = this.sortList(newhead);
-        ListNode temp2 = this.sortList(head);
+        ListNode temp2 = this.sortList(realHead.next);
         return this.mergeSort(temp2,temp1);
     }
     public ListNode mergeSort(ListNode a,ListNode b)
     {
-//        this.printList("ReadyForMerge : ",a);
-//        this.printList("ReadyForMerge : ",b);
+        if(a == null) return b;
+        if(b == null) return a;
+//        LinkedList.printList("ReadyForMerge : ",a);
+//        LinkedList.printList("ReadyForMerge : ",b);
         ListNode temp;
-        ListNode p1 = a;
-        ListNode p2 = b;
+        ListNode aHead = new ListNode(0);
+        ListNode bHead = new ListNode(0);
+        aHead.next = a;
+        bHead.next = b;
+        ListNode p1 = aHead;
+        ListNode p2 = bHead;
         while(p1.next != null && p2.next != null)
         {
+
             if(p1.next.val >p2.next.val){
-                temp = p2.next.next;
-                p2.next.next = p1.next;
-                p1.next = p2.next;
-                p2.next = temp;
+                temp = p2.next;
+                p2.next = p2.next.next;
+                temp.next = p1.next;
+                p1.next = temp;
                 p1 = p1.next;
             }
             else
@@ -49,12 +57,12 @@ public class SortList {
         }
         if(p1.next != null) p2.next = p1.next;
         if(p2.next != null) p1.next = p2.next;
-//        this.printList("MergeRes : ",a);
-        return a;
+//        LinkedList.printList("MergeRes : ",aHead.next);
+        return aHead.next;
     }
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(0);
+        ListNode head = new ListNode(3);
         ListNode p1 = new ListNode(2);//1
         ListNode p2 = new ListNode(1);//3
         ListNode p3 = new ListNode(2);
@@ -63,10 +71,10 @@ public class SortList {
         ListNode p6 = new ListNode(6);
         head.next = p1;
         p1.next = p2;
-//        p2.next = p3;
-//        p3.next = p4;
-//        p4.next = p5;
-//        p5.next = p6;
+        p2.next = p3;
+        p3.next = p4;
+        p4.next = p5;
+        p5.next = p6;
         SortList sl = new SortList();
         head = sl.sortList(head);
         LinkedList.printList("result : ", head);

@@ -12,9 +12,11 @@ import tools.LinkedList;
  */
 public class InsertionSortList {
     public ListNode insertionSortList(ListNode head) {
-        LinkedList.printList("ReadyForSort : ",head);
         if(head == null || head.next == null) return head;
-        ListNode p1 = head.next;
+        ListNode realHead = new ListNode(0);
+        realHead.next = head;
+        LinkedList.printList("ReadyForSort : ",realHead.next);
+        ListNode p1 = head;
         ListNode p2;
         ListNode temp;
         while(p1.next != null)
@@ -23,7 +25,7 @@ public class InsertionSortList {
             if(p1.val > p2.val)
             {
                 p1.next = p2.next;
-                temp = head;
+                temp = realHead;
                 while(temp.next != null)
                 {
                     if(temp.next.val > p2.val)
@@ -34,11 +36,11 @@ public class InsertionSortList {
                     }
                     else temp = temp.next;
                 }
-                LinkedList.printList(p2.val+" : ",head);
+                LinkedList.printList(p2.val+" : ",realHead.next);
             }
             else p1 = p1.next;
         }
-        return head;
+        return realHead.next;
     }
 
     public static void main(String[] args) {
